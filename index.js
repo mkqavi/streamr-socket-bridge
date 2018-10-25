@@ -7,13 +7,11 @@ let server = net.createServer((socket) => {
   let sub;
 
   socket.on('data', (data) => {
-    let stream = JSON.parse(data.toString('utf8')).stream;
+    let stream = JSON.parse(data.toString('utf8'));
     sub = client.subscribe(
-      {
-        stream: stream,
-      },
+      stream,
       (message, metadata) => {
-        socket.write(`${JSON.stringify(message)}\r\n`)
+        socket.write(`${JSON.stringify(message)}\r\n`);
       }
     );
   });
